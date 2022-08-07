@@ -25,4 +25,8 @@ export class HeroesService {
   getHeroeByWord(word: string, limit: number): Observable<Heroe[]> {
     return this.http.get<Heroe[]>(`${this.baseUrl}/heroes?q=${word}&_limit=${limit}`);
   }
+
+  insertHero(newHero: Heroe): Observable<Heroe> {
+    return this.http.post<Heroe>(`${this.baseUrl}/heroes`, newHero);
+  }
 }
