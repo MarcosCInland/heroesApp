@@ -38,14 +38,21 @@
 
         <br>
 
-        <button mat-raised-button color="primary" (click)="guardar()" *ngIf="!heroe.id">
-            <mat-icon>edit</mat-icon>
-            Guardar
-        </button>
-        <button mat-raised-button color="warn" (click)="guardar()" *ngIf="heroe.id">
-            <mat-icon>edit</mat-icon>
-            Editar
-        </button>
+        <div fxLayoutGap="1rem">
+            <button mat-raised-button color="accent" (click)="guardar()" *ngIf="!heroe.id">
+                <mat-icon>save</mat-icon>
+                Guardar
+            </button>
+            <button mat-raised-button color="warn" (click)="guardar()" *ngIf="heroe.id">
+                <mat-icon>edit</mat-icon>
+                Editar
+            </button>
+            <button mat-raised-button color="primary" (click)="eliminar()" *ngIf="heroe.id">
+                <mat-icon>delete</mat-icon>
+                Eliminar
+            </button>
+        </div>
+        
     </div>
 
     <div fxFlex="50">
