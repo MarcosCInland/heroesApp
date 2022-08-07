@@ -29,4 +29,8 @@ export class HeroesService {
   insertHero(newHero: Heroe): Observable<Heroe> {
     return this.http.post<Heroe>(`${this.baseUrl}/heroes`, newHero);
   }
+
+  editHero(updatedHero: Heroe): Observable<Heroe> {
+    return this.http.put<Heroe>(`${this.baseUrl}/heroes/${updatedHero.id}`, updatedHero);
+  }
 }
