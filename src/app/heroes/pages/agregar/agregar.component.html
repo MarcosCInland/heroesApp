@@ -1,4 +1,6 @@
-<h1>Nuevo heroe</h1>
+<h1>{{ heroe.id? 'Editar' : 'Nuevo' }} Heroe
+    <small>{{heroe.superhero}}</small>
+</h1>
 
 <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="4rem">
     <div fxFlex="50" fxLayout="column">
@@ -39,13 +41,9 @@
         <br>
 
         <div fxLayoutGap="1rem">
-            <button mat-raised-button color="accent" (click)="guardar()" *ngIf="!heroe.id">
-                <mat-icon>save</mat-icon>
-                Guardar
-            </button>
-            <button mat-raised-button color="warn" (click)="guardar()" *ngIf="heroe.id">
-                <mat-icon>edit</mat-icon>
-                Editar
+            <button mat-raised-button color="{{heroe.id? 'accent' : 'warn'}}" (click)="guardar()" >
+                <mat-icon>{{ heroe.id? 'save' : 'edit' }}</mat-icon>
+                {{ heroe.id? 'Guardar' : 'Nuevo' }}
             </button>
             <button mat-raised-button color="primary" (click)="eliminar()" *ngIf="heroe.id">
                 <mat-icon>delete</mat-icon>

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { ConfirmActionComponent } from '../../components/confirm-action/confirm-action.component';
 import { Heroe, Publisher } from '../../interfaces/heroes.interface';
 import { HeroesService } from '../../services/heroes.service';
 
@@ -38,7 +40,7 @@ export class AgregarComponent implements OnInit {
   }
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router ,private heroesService: HeroesService,
-              private _snackBar: MatSnackBar) { }
+              private _snackBar: MatSnackBar, private dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -67,9 +69,24 @@ export class AgregarComponent implements OnInit {
   }
 
   eliminar() : void {
+    const result = this.dialog.open(ConfirmActionComponent, {
+      width: '25rem',
+      data: this.heroe
+    });
+    result.afterClosed()
+    .subscribe(success => {
+      if (success) {
+        //DELETE
+        this.heroesService.deleteHero(this.heroe.id!)
+        .subscribe(success => { 
+          this.router.navigate(['heroes/listado']);
+          this.mostrarSnackBar('Registro eliminado'); 
+        }, failure => {})
+      }
+    }, failure => {})
     //DELETE
-    this.heroesService.deleteHero(this.heroe.id!)
-    .subscribe(success => { this.router.navigate(['heroes/listado']) }, failure => {})
+    /*this.heroesService.deleteHero(this.heroe.id!)
+    .subscribe(success => { this.router.navigate(['heroes/listado']) }, failure => {})*/
   }
 
   mostrarSnackBar(msg: string): void {
