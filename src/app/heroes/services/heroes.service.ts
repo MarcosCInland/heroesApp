@@ -25,4 +25,16 @@ export class HeroesService {
   getHeroeByWord(word: string, limit: number): Observable<Heroe[]> {
     return this.http.get<Heroe[]>(`${this.baseUrl}/heroes?q=${word}&_limit=${limit}`);
   }
+
+  insertHero(newHero: Heroe): Observable<Heroe> {
+    return this.http.post<Heroe>(`${this.baseUrl}/heroes`, newHero);
+  }
+
+  editHero(updatedHero: Heroe): Observable<Heroe> {
+    return this.http.put<Heroe>(`${this.baseUrl}/heroes/${updatedHero.id}`, updatedHero);
+  }
+
+  deleteHero(id: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/heroes/${id}`);
+  }
 }
