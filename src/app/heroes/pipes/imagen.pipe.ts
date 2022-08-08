@@ -3,6 +3,7 @@ import { Heroe } from '../interfaces/heroes.interface';
 
 @Pipe({
   name: 'imagen'
+  //IMPURO -> Cada vez que pase por el ciclo de deteccion de cambios (consume mas recursos). TRUE cuando el argumento cambia
 })
 export class ImagenPipe implements PipeTransform {
 
